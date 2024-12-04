@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="11.png" type="image/x-icon">
+    <link href="lf.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Englebert&family=Oswald:wght@200..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+    <title>Kapcsolat</title>
+</head>
+<body>
+    <header>
+        <div class="topnav" id="myTopnav">
+            <a href="index.html"><img src="logo.png" alt="LigetFeszt Logo" class="logo"></a>
+            <a href="lineup.html">Line-up</a>
+            <a href="jegy.html">Jegyek</a>
+            <a href="#">Kapcsolat</a>
+            <a href="galeria.html">Galéria</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </header>
+    <main>
+        <!-- Elérhetőségek -->
+        <section class="contact-info">
+            <h2>Elérhetőségek</h2>
+            <p><strong>Cím:</strong><br> Budapest, Városliget</p>
+            <p><strong>Telefon:</strong><br> +36 30 123 4567</p>
+            <p><strong>E-mail:</strong><br> info@ligetfeszt.hu</p>
+        </section>
+
+        <hr class="separator">
+
+        <!-- Kapcsolatfelvételi űrlap -->
+        <section class="contact-form">
+            <h2>Véleménykutatás</h2>
+            <form id="detailed-form" action="#" method="post">
+                <label for="vezeteknev">Vezetéknév:</label>
+                <input type="text" id="vezeteknev" name="vezeteknev" placeholder="pl.: Gipsz" required>
+                
+                <label for="keresztnev">Keresztnév:</label>
+                <input type="text" id="keresztnev" name="keresztnev" placeholder="pl.: Jakab" required>
+                
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="pl.: gipszjakab@gmail.com" required>
+                
+                <label for="telefonszam">Telefonszám:</label>
+                <input type="tel" id="telefonszam" name="telefonszam" placeholder="pl.: +36123456789" pattern="[0-9+]{10,15}" required>
+
+                <fieldset>
+                    <legend>Melyik napon/napokon jönnél?</legend>
+                    <label><input type="checkbox" name="nap" value="marcius2"> Március 2.</label>
+                    <label><input type="checkbox" name="nap" value="marcius3"> Március 3.</label>
+                    <label><input type="checkbox" name="nap" value="marcius4"> Március 4.</label>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Melyik program érdekel a legjobban?</legend>
+                    <label><input type="radio" name="programok" value="koncert"> Koncert</label>
+                    <label><input type="radio" name="programok" value="workshop"> Workshop</label>
+                    <label><input type="radio" name="programok" value="gasztro"> Gasztro</label>
+                    <label><input type="radio" name="programok" value="joga"> Jóga</label>
+                </fieldset>
+                
+                <label for="visszajelzes">Írd meg, milyen fellépőt látnál szívesen:</label>
+                <textarea id="visszajelzes" name="visszajelzes" placeholder="Előadó neve..."></textarea>
+                
+                <label>Mennyire várod a fesztivált? (0-100):</label>
+                <input type="range" id="varakozas" name="varakozas" min="0" max="100">
+                
+                <div class="buttons">
+                    <button type="submit">Küldés</button>
+                    <button type="reset">Visszaállítás</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 LigetFeszt. Minden jog fenntartva.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#detailed-form').on('submit', function(e) {
+                let isValid = true;
+
+                // Ellenőrizzük a vezetéknév mezőt
+                if ($('#vezeteknev').val().trim() === '') {
+                    alert('A vezetéknév mező kitöltése kötelező!');
+                    isValid = false;
+                }
+
+                // Ellenőrizzük a keresztnév mezőt
+                if ($('#keresztnev').val().trim() === '') {
+                    alert('A keresztnév mező kitöltése kötelező!');
+                    isValid = false;
+                }
+
+                // Ellenőrizzük az email mezőt
+                const email = $('#email').val().trim();
+                const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+                if (!emailPattern.test(email)) {
+                    alert('Kérlek adj meg egy érvényes email címet!');
+                    isValid = false;
+                }
+
+                // Telefonszám ellenőrzése
+                const phone = $('#telefonszam').val().trim();
+                const phonePattern = /^[0-9+]{10,15}$/;
+                if (!phonePattern.test(phone)) {
+                    alert('Kérlek adj meg egy érvényes telefonszámot!');
+                    isValid = false;
+                }
+
+                // Checkboxok ellenőrzése
+                if ($('input[name="nap"]:checked').length === 0) {
+                    alert('Kérlek válassz legalább egy napot!');
+                    isValid = false;
+                }
+
+                // Rádiógomb ellenőrzése
+                if ($('input[name="programok"]:checked').length === 0) {
+                    alert('Kérlek válassz egy programot!');
+                    isValid = false;
+                }
+
+                // Ha valami nem stimmel, megakadályozzuk a beküldést
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

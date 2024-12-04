@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="11.png" type="image/x-icon">
+    <link href="lf.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Englebert&family=Oswald:wght@200..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+    <title>Jegyek</title>
+</head>
+<body>
+    <header>
+
+    <div class="topnav" id="myTopnav">
+        <a href="index.html"><img src="logo.png" alt="LigetFeszt Logo" class="logo"></a>
+        <a href="lineup.html">Line-up</a>
+        <a href="#">Jegyek</a>
+        <a href="kapcsolat.html">Kapcsolat</a>
+        <a href="galeria.html">Galéria</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    
+    </header>
+    <main>
+        <section class="tickets">
+            <h1>Jegyárak és Információk</h1>
+            <p>Válaszd ki a megfelelő jegytípust, és készülj a fesztivál élményére!</p>
+            <div class="ticket-options">
+                <div class="ticket">
+                    <h2>Normál Jegy</h2>
+                    <p>Ár: 15 000 Ft</p>
+                    <button class="buy-ticket" data-type="Normál Jegy">Vásárlás</button>
+                </div>
+                <div class="ticket">
+                    <h2>VIP Jegy</h2>
+                    <p>Ár: 25 000 Ft</p>
+                    <button class="buy-ticket" data-type="VIP Jegy">Vásárlás</button>
+                </div>
+                <div class="ticket">
+                    <h2>Diák Jegy</h2>
+                    <p>Ár: 10 000 Ft</p>
+                    <button class="buy-ticket" data-type="Diák Jegy">Vásárlás</button>
+                </div>
+            </div>
+        </section>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span id="close-popup" class="close-popup">&times;</span>
+                <h2>Jegyértékesítés Hamarosan</h2>
+                <p>A jegyek értékesítése 2024. januárban indul. Addig is kövesd a híreinket!</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 LigetFeszt. Minden jog fenntartva.</p>
+    </footer>
+        <script>
+            // Felugró ablak kezelése
+            const popup = document.getElementById("popup");
+            const closePopup = document.getElementById("close-popup");
+            const buyButtons = document.querySelectorAll(".buy-ticket");
+    
+            buyButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    popup.style.display = "flex";
+                });
+            });
+    
+            closePopup.addEventListener("click", () => {
+                popup.style.display = "none";
+            });
+    
+            // Felugró ablak bezárása háttérre kattintva
+            window.addEventListener("click", (event) => {
+                if (event.target === popup) {
+                    popup.style.display = "none";
+                }
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="11.png" type="image/x-icon">
+    <link href="lf.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+    <title>Városliget Quiz</title>
+</head>
+<body>
+    <header>
+        <div class="topnav" id="myTopnav">
+            <a href="index.html"><img src="logo.png" alt="LigetFeszt Logo" class="logo"></a>
+            <a href="lineup.html">Line-up</a>
+            <a href="jegy.html">Jegyek</a>
+            <a href="kapcsolat.html">Kapcsolat</a>
+            <a href="galeria.html">Galéria</a>
+            <a href="#">Quiz</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </header>
+    <h1 class="vr">Városliget Quiz</h1>
+    <div class="quiz-container">
+        <p id="question">Kérdés jelenik meg itt...</p>
+        <div id="options"></div>
+        <button id="next-question" style="display: none;">Következő kérdés</button>
+    </div>
+    <div class="result" id="result"></div>
+    <script>
+        const questions = [
+            {
+                question: "Melyik évben nyitották meg hivatalosan a Városligeti Műjégpálya elődjét?",
+                options: ["1813", "1839", "1896", "1870"],
+                answer: 3
+            },
+            {
+                question: "Milyen híres épület található a Városligetben?",
+                options: ["Parlament", "Vajdahunyad vára", "Szépművészeti Múzeum", "Budavári Palota"],
+                answer: 1
+            },
+            {
+                question: "Melyik tó található a Városligetben?",
+                options: ["Naplás-tó", "Feneketlen-tó", "Városligeti-tó", "Velencei-tó"],
+                answer: 2
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const nextButton = document.getElementById("next-question");
+        const resultElement = document.getElementById("result");
+
+        function showQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            optionsElement.innerHTML = "";
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => selectAnswer(button, index);
+                optionsElement.appendChild(button);
+            });
+            nextButton.style.display = "none";
+            resultElement.textContent = "";
+        }
+
+        function selectAnswer(button, selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedIndex === currentQuestion.answer) {
+                score++;
+            }
+
+            const buttons = optionsElement.querySelectorAll("button");
+            buttons.forEach(btn => btn.disabled = true);
+            button.classList.add("selected");
+
+            nextButton.style.display = "inline-block";
+        }
+
+        nextButton.onclick = () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } 
+            else {
+                endQuiz();
+            }
+        };
+
+        function endQuiz() {
+            questionElement.textContent = "Gratulálok, befejezted a quizt!";
+            optionsElement.innerHTML = ""; // Töröljük a válaszlehetőségeket
+            nextButton.style.display = "none"; // Eltüntetjük a következő gombot
+        
+            // Pontszám visszajelzés
+            resultElement.style.display = "block";
+            if (score === questions.length) {
+                resultElement.textContent = `Pontszámod: ${score} / ${questions.length} - Tökéletes teljesítmény!`;
+            } 
+            else if (score > 0) {
+                resultElement.textContent = `Pontszámod: ${score} / ${questions.length} - Szép munka!`;
+            } 
+            else {
+                resultElement.textContent = `Pontszámod: ${score} / ${questions.length} - Legközelebb jobban sikerülhet!`;
+            }
+        }
+        showQuestion();
+    </script>
+    <footer>
+        <p id="lab">&copy; 2024 LigetFeszt. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>

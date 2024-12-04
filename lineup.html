@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="11.png" type="image/x-icon">
+    <link href="lf.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Englebert&family=Oswald:wght@200..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Truculenta:opsz,wght@12..72,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+    <title>Line-up</title>
+</head>
+<body>
+    <header>
+
+        <div class="topnav" id="myTopnav">
+            <a href="index.html"><img src="logo.png" alt="LigetFeszt Logo" class="logo"></a>
+            <a href="#">Line-up</a>
+            <a href="jegy.html">Jegyek</a>
+            <a href="kapcsolat.html">Kapcsolat</a>
+            <a href="galeria.html">Galéria</a>
+            <a href="quiz.html">Quiz</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    </header>
+    <main>
+        <section class="program-preview">
+            <h1 id="selected-day">Március 2. - Program Előzetes</h1>
+            <button id="select-day-button">Válassz napot</button>
+    
+            <div id="day-selector" class="popup" style="display: none;">
+                <div class="popup-content">
+                    <span id="close-popup" class="close-popup">&times;</span>
+                    <h2>Válaszd ki a napot:</h2>
+                    <ul>
+                        <li><button class="day-option" data-day="2">Március 2.</button></li>
+                        <li><button class="day-option" data-day="3">Március 3.</button></li>
+                        <li><button class="day-option" data-day="4">Március 4.</button></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div id="programs">
+                <div id="day-2-programs" class="programs-content">
+                    <div class="program-item">
+                        <h2>10:00 - Kapunyitás</h2>
+                        <p>A fesztivál hivatalos megnyitója, különleges meglepetés előadóval.</p>
+                    </div>
+
+                    <div class="program-item">
+                        <h2>12:00 - Koncert</h2>
+                        <p>Az ország egyik legismertebb rock bandája lép színpadra.</p>
+                    </div>
+
+                    <div class="program-item">
+                    <h2>16:00 - Koncert</h2>
+                        <p>Az egyik tehetségkutatónk nyertese fog minket elkápráztatni.</p>
+                    </div>
+
+                    <div class="program-item">
+                    <h2>18:00 - Koncert</h2>
+                        <p>Az ország egyik legismertebb rock bandája lép színpadra.</p>
+                    </div>
+
+                    <div class="program-item">
+                        <h2>A további programokról később tájékoztatunk titeket!</h2>
+                    </div>
+                </div>
+                <div id="day-3-programs" class="programs-content" style="display: none;">
+                    
+                    <div class="program-item">
+                        <h2>10:00 - Jóga a parkban</h2>
+                        <p>Reggeli relaxáció és jóga a természet lágy ölén.</p>
+                    </div>
+                    
+                    <div class="program-item">
+                        <h2>14:00 - Gasztronómiai bemutató</h2>
+                        <p>Főzőműsor hazai ízekkel és különleges fogásokkal.</p>
+                    </div>
+                </div>
+
+                <div id="day-4-programs" class="programs-content" style="display: none;">
+                    <div class="program-item">
+                        <h2>11:00 - Gyereknap</h2>
+                        <p>Interaktív programok és kézműves foglalkozások a legkisebbeknek.</p>
+                    </div>
+
+                    <div class="program-item">
+                        <h2>17:00 - Zárókoncert</h2>
+                        <p>Az esemény csúcspontja: A fesztivál zárókoncertje.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 LigetFeszt. Minden jog fenntartva.</p>
+    </footer>
+        <script>
+                const selectDayButton = document.getElementById("select-day-button");
+                const daySelector = document.getElementById("day-selector");
+                const closePopup = document.getElementById("close-popup");
+                const dayOptions = document.querySelectorAll(".day-option");
+                const selectedDay = document.getElementById("selected-day");
+                const programSections = document.querySelectorAll(".programs-content");
+            
+                // Popup megnyitása
+                selectDayButton.addEventListener("click", () => {
+                    daySelector.style.display = "block";
+                });
+            
+                // Popup bezárása
+                closePopup.addEventListener("click", () => {
+                    daySelector.style.display = "none";
+                });
+            
+                // Nap kiválasztása
+                dayOptions.forEach(button => {
+                    button.addEventListener("click", () => {
+                        const selected = button.getAttribute("data-day");
+            
+                // Nap cím frissítése
+                selectedDay.innerText = `Március ${selected}. - Program Előzetes`;
+            
+                // Programok megjelenítése
+                programSections.forEach(section => {
+                    section.style.display = "none";
+                });
+                document.getElementById(`day-${selected}-programs`).style.display = "block";
+            
+                // Popup bezárása
+                daySelector.style.display = "none";
+                    });
+                });
+            
+                // Popup bezárása háttérre kattintva
+                window.addEventListener("click", event => {
+                    if (event.target === daySelector) {
+                        daySelector.style.display = "none";
+                    }
+                });
+        </script>
+</body>
+</html>
